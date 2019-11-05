@@ -9,7 +9,7 @@ string getUserPassword();
 bool acceptedLength(string password);
 bool acceptedPhrase(string password);
 void displayPassword(string password);
-
+int numberOfDigits(string password);
 //---------------------------
 
 //-MAIN PROGRAM--------------
@@ -18,7 +18,7 @@ int main()
     string entry; // keeps track of what the user entered
     bool isGoodLength = false; // whether it is an acceptable length
     bool isGoodWord = false; // whether it is an acceptable word
- 
+    int digits = 0;
     do
     {
         // (2) call the getUserPassword function and store its return in entry
@@ -29,8 +29,8 @@ int main()
         // (4) call the acceptedPhrase function w/ the entry argument
         //     and store its return in isGoodWord
         isGoodWord=acceptedPhrase(entry);
-
-    }while( !isGoodLength || !isGoodWord );
+        digits=numberOfDigits(entry);
+    }while( !isGoodLength || !isGoodWord || digits<2 );
 
     cout<<"Password ";
     // (5) call the displayPassword function w/ the entry argument
@@ -92,5 +92,20 @@ void displayPassword(string password)
     {
         cout<<"*";
     }
+}
+
+int numberOfDigits(string password)
+{
+    int digitCounter= 0;
+
+    for(int i=0; i<password.length(); i++)
+    { 
+      char symbol=password[i];
+      if(symbol >= 48 && symbol <= 57 )
+      {
+        digitCounter++;
+      }
+    }
+    return digitCounter;
 }
 //----------------------------
